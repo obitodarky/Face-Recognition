@@ -26,8 +26,9 @@ while True:
     for x,y,w,h in faces:
         id_, conf = recognizer.predict(gray_image[y: y + h, x: x + w])
         if conf >= 45 and conf <= 85:
-            #print(id_)
-            print(labels[id_])
+            name = labels[id_]
+            font = cv2.FONT_HERSHEY_PLAIN
+            cv2.putText(frame, name, (x,y), font, 2, (255,255,255), 1, cv2.LINE_AA )
         cv2.rectangle(frame, (x,y) , (x+w,y+h) , (0,255,0), 2)
 
     cv2.imshow("Face", frame)
