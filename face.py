@@ -20,12 +20,12 @@ while True:
 
     check, frame = video.read()
     gray_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(frame, scaleFactor=1.05, minNeighbors=5)
+    faces = face_cascade.detectMultiScale(frame, scaleFactor=1.2, minNeighbors=5)
 
 
     for x,y,w,h in faces:
         id_, conf = recognizer.predict(gray_image[y: y + h, x: x + w])
-        if conf >= 70 and conf <= 85:
+        if conf >= 45 and conf <= 85:
             #print(id_)
             print(labels[id_])
         cv2.rectangle(frame, (x,y) , (x+w,y+h) , (0,255,0), 2)

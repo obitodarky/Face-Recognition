@@ -32,7 +32,9 @@ for root, dirs, files in os.walk(image_dir):
             id_ = label_ids[label]
             #print(label_ids)
             pil_image = Image.open(path).convert("L")
-            image_array = np.array(pil_image, 'uint8')
+            size = (550,550)
+            final_image = pil_image.resize(size, Image.ANTIALIAS)
+            image_array = np.array(final_image, 'uint8')
 
             faces = face_cascade.detectMultiScale(image_array, scaleFactor=1.2, minNeighbors=5)
 
