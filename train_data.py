@@ -30,8 +30,8 @@ for root, dirs, files in os.walk(image_dir):
                 label_ids[label] = current_id
                 current_id +=1
             id_ = label_ids[label]
-            print(label_ids)
-            pil_image = Image.open(path)
+            #print(label_ids)
+            pil_image = Image.open(path).convert("L")
             image_array = np.array(pil_image, 'uint8')
 
             faces = face_cascade.detectMultiScale(image_array, scaleFactor=1.2, minNeighbors=5)
@@ -39,7 +39,7 @@ for root, dirs, files in os.walk(image_dir):
             for (x,y,w,h) in faces:
                 roi = image_array[y:y+h, x:x+w]
                 train_list.append(roi)
-                labels_list.append(roi)
+                labels_list.append(id_)
 
 
 with open("labels.pickle", "wb") as f:
